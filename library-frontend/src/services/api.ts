@@ -16,7 +16,6 @@ const api: AxiosInstance = axios.create({
 });
 
 export const userAPI = {
-  // Fetch all users
   fetchUsers: async (): Promise<FetchUsersResponse> => {
     const response: AxiosResponse<FetchUsersResponse> = await api.get(
       "/users/fetch-users"
@@ -24,7 +23,6 @@ export const userAPI = {
     return response.data;
   },
 
-  // Create single user
   createUser: async (
     userData: Omit<User, "id" | "timeStamp">
   ): Promise<CreateUserResponse> => {
@@ -35,7 +33,7 @@ export const userAPI = {
     return response.data;
   },
 
-  // Create bulk users
+
   createBulkUsers: async (): Promise<CreateBulkUsersResponse> => {
     const response: AxiosResponse<CreateBulkUsersResponse> = await api.post(
       "/users/create-bulk-users"
@@ -43,7 +41,6 @@ export const userAPI = {
     return response.data;
   },
 
-  // Clear cache
   clearCache: async (): Promise<{ message: string }> => {
     const response: AxiosResponse<{ message: string }> = await api.get(
       "/users/clear-cache"

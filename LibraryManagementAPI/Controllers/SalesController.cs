@@ -15,7 +15,6 @@ namespace LibraryManagementAPI.Controllers
             _context = context;
         }
 
-        // Query 1: Calculate total quantity_sold
         [HttpGet("total-quantity-sold")]
         public async Task<IActionResult> GetTotalQuantitySold()
         {
@@ -28,14 +27,11 @@ namespace LibraryManagementAPI.Controllers
             });
         }
 
-        // Query 2: Product with highest unit price
         [HttpGet("highest-priced-product")]
         public async Task<IActionResult> GetHighestPricedProduct()
         {
-            // Load all products into memory first (client-side evaluation)
             var products = await _context.Products.ToListAsync();
 
-            // Now we can safely use LINQ to Objects
             var product = products
                 .OrderByDescending(p => p.UnitPrice)
                 .Select(p => new { p.ProductName, p.UnitPrice })
@@ -48,7 +44,6 @@ namespace LibraryManagementAPI.Controllers
             });
         }
 
-        // Query 3: Products not sold
         [HttpGet("products-not-sold")]
         public async Task<IActionResult> GetProductsNotSold()
         {
@@ -64,7 +59,6 @@ namespace LibraryManagementAPI.Controllers
             });
         }
 
-        // Bonus: Get all sales with product details
         [HttpGet("all-sales")]
         public async Task<IActionResult> GetAllSales()
         {

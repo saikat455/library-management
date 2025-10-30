@@ -3588,11 +3588,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
+      "projectUniqueName": "D:\\library-management\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
       "projectName": "LibraryManagementAPI",
-      "projectPath": "D:\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
+      "projectPath": "D:\\library-management\\LibraryManagementAPI\\LibraryManagementAPI.csproj",
       "packagesPath": "C:\\Users\\one\\.nuget\\packages\\",
-      "outputPath": "D:\\LibraryManagementAPI\\obj\\",
+      "outputPath": "D:\\library-management\\LibraryManagementAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

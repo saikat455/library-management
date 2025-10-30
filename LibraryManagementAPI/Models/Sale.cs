@@ -7,8 +7,6 @@ namespace LibraryManagementAPI.Models
         public int QuantitySold { get; set; }
         public DateTime SaleDate { get; set; }
         public decimal TotalPrice { get; set; }
-
-        // Navigation property
         public Product Product { get; set; } = null!;
     }
 }

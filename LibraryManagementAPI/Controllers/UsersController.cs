@@ -21,7 +21,6 @@ namespace LibraryManagementAPI.Controllers
             _cache = cache;
         }
 
-        // POST: api/users/create-user
         [HttpPost("create-user")]
         public async Task<IActionResult> CreateUser([FromBody] User user)
         {
@@ -32,7 +31,6 @@ namespace LibraryManagementAPI.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            // Clear cache since data changed
             _cache.Remove(UsersCacheKey);
 
             return CreatedAtAction(nameof(GetUsers), new { id = user.Id }, user);
@@ -41,37 +39,29 @@ namespace LibraryManagementAPI.Controllers
         [HttpPost("create-bulk-users")]
         public async Task<IActionResult> CreateBulkUsers()
         {
-            // Create faker for generating random data
             var userFaker = new Faker<User>()
                 .RuleFor(u => u.Name, f => f.Name.FullName())
                 .RuleFor(u => u.Age, f => f.Random.Int(18, 80))
                 .RuleFor(u => u.Email, f => f.Internet.Email())
                 .RuleFor(u => u.TimeStamp, f => f.Date.Between(DateTime.UtcNow.AddYears(-1), DateTime.UtcNow));
 
-            // Generate 10,000 users
             var users = userFaker.Generate(10000);
 
-            // Add to database in batches for better performance
             await _context.Users.AddRangeAsync(users);
             await _context.SaveChangesAsync();
 
-            // Clear cache since data changed
             _cache.Remove(UsersCacheKey);
 
             return Ok(new { message = "10,000 users created successfully", count = users.Count });
         }
 
-        // GET: api/users/fetch-users
         [HttpGet("fetch-users")]
         public async Task<IActionResult> GetUsers()
         {
-            // Try to get from cache first
             if (!_cache.TryGetValue(UsersCacheKey, out List<User>? users))
             {
-                // If not in cache, fetch from database
                 users = await _context.Users.ToListAsync();
 
-                // Store in cache for 5 minutes
                 var cacheOptions = new MemoryCacheEntryOptions()
                     .SetSlidingExpiration(TimeSpan.FromMinutes(5));
 
@@ -86,7 +76,6 @@ namespace LibraryManagementAPI.Controllers
             });
         }
 
-        // GET: api/users/clear-cache (helper endpoint for testing)
         [HttpGet("clear-cache")]
         public IActionResult ClearCache()
         {

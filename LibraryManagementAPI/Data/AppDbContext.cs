@@ -39,7 +39,6 @@ namespace LibraryManagementAPI.Data
                 new Product { ProductId = 105, ProductName = "Mouse", Category = "Electronics", UnitPrice = 15.00M }
             );
 
-            // Seed data for Sales
             modelBuilder.Entity<Sale>().HasData(
                 new Sale { SaleId = 1, ProductId = 101, QuantitySold = 5, SaleDate = new DateTime(2024, 1, 1), TotalPrice = 2500.00M },
                 new Sale { SaleId = 2, ProductId = 102, QuantitySold = 3, SaleDate = new DateTime(2024, 1, 2), TotalPrice = 900.00M },
